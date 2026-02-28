@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package id.web.saka.fountation.permission;
+
+option java_package = "id.web.saka.fountation.permission";
+option java_outer_classname = "PermissionProtoFile";
+option java_multiple_files = true;
+
+message PermissionProto {
+  int64 permissionId = 1;
+  string permissionName = 2;
+  bool isSuperAdmin = 3;
+  string permissionResource = 4;
+  string permissionAction = 5;
+  string permissionDescription = 6;
+  bool isAssigned = 7;
+}

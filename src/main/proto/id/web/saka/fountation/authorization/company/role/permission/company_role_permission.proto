@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package id.web.saka.fountation.authorization.company.role.permission;
+
+option java_package = "id.web.saka.fountation.authorization.company.role.permission";
+option java_outer_classname = "CompanyRolePermissionProtoFile";
+option java_multiple_files = true;
+
+// Import PermissionProto from another proto file
+import "id/web/saka/fountation/permission/permission.proto";
+
+
+// Main DTO
+message CompanyRolePermissionProto {
+  int64 roleId = 1;
+  int64 companyId = 2;
+  string roleName = 3;
+  string roleDescription = 4;
+  repeated id.web.saka.fountation.permission.PermissionProto permissions = 5;
+}
+
+// Request message for fetching role permissions
+message GetCompanyRolePermissionRequest {
+  int64 company_id = 1;
+  int64 user_id = 2;
+}
+
+// gRPC service definition
+service CompanyRolePermissionService {
+  rpc GetCompanyRolePermission (GetCompanyRolePermissionRequest) returns (CompanyRolePermissionProto);
+}

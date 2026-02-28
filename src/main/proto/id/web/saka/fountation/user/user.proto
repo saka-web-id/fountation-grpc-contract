@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package id.web.saka.fountation.user;
+
+option java_package = "id.web.saka.fountation.user";
+option java_multiple_files = true;
+option java_outer_classname = "UserProtoFile";
+
+import "google/protobuf/timestamp.proto";
+
+message UserProto {
+  int64 id = 1;
+  string email = 2;
+  string name = 3;
+  string phone = 4;
+  string status = 5;
+  bool is_verified = 6;
+  google.protobuf.Timestamp last_login_at = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+  int64 leader_id = 10;
+  string note = 11;
+}

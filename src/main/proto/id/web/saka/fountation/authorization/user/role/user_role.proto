@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package id.web.saka.fountation.authorization.user.role;
+
+option java_package = "id.web.saka.fountation.authorization.user.role";
+option java_multiple_files = true;
+option java_outer_classname = "UserRoleProtoFile";
+
+import "id/web/saka/fountation/user/user.proto";
+import "id/web/saka/fountation/account/account.proto";
+import "id/web/saka/fountation/organization/company/company.proto";
+import "id/web/saka/fountation/organization/department/department.proto";
+
+message UserRoleProto {
+  int64 id = 1;
+  int64 user_id = 2;
+  int64 role_id = 3;
+  int64 company_id = 4;
+}
+
+// Request for update
+message UpdateUserRolesRequest {
+  int64 company_id = 1;
+  int64 user_id = 2;
+  UserRoleProto user_role = 3;
+}
+
+// Request for add
+message AddUserRoleRequest {
+  int64 company_id = 1;
+  int64 user_id = 2;
+  UserRoleProto user_role = 3;
+}
+
+// UserRegistrationDTO
+message UserRegistrationProto {
+  id.web.saka.fountation.user.UserProto user = 1;
+  id.web.saka.fountation.account.AccountProto account = 2;
+  id.web.saka.fountation.organization.company.CompanyProto company = 3;
+  id.web.saka.fountation.organization.department.DepartmentProto department = 4;
+}
+
+// Service definition
+service UserRoleService {
+  rpc UpdateUserRoles(UpdateUserRolesRequest) returns (UserRoleProto);
+  rpc AddUserRole(AddUserRoleRequest) returns (UserRoleProto);
+  rpc AssignRoleToNewUser(UserRegistrationProto) returns (UserRegistrationProto);
+}

@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package id.web.saka.fountation.organization.company;
+
+option java_package = "id.web.saka.fountation.organization.company";
+option java_multiple_files = true;
+option java_outer_classname = "CompanyProtoFile";
+
+import "google/protobuf/timestamp.proto";
+
+message CompanyProto {
+  int64 id = 1;
+  string name = 2;
+  string address = 3;
+  string phone = 4;
+  string email = 5;
+  string website = 6;
+  string description = 7;
+  string logo_url = 8;
+  string tax_id = 9;
+  string registration_number = 10;
+  string status = 11;
+  string industry = 12;
+  string type = 13;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+  bool is_default = 16;
+}

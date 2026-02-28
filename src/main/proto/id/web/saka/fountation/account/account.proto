@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package id.web.saka.fountation.account;
+
+import "google/protobuf/timestamp.proto";
+
+message AccountProto {
+  string account_number = 1;
+  string account_status = 2;
+  string membership_type = 3;
+  string membership_status = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp membership_start_date = 6;
+  google.protobuf.Timestamp membership_end_date = 7;
+}
