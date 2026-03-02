@@ -3,13 +3,94 @@ syntax = "proto3";
 package id.web.saka.fountation.account;
 
 import "google/protobuf/timestamp.proto";
+import "id/web/saka/fountation/user/user.proto";
+import "id/web/saka/fountation/organization/company/company.proto";
+import "id/web/saka/fountation/organization/department/department.proto";
+
+option java_multiple_files = true;
+option java_package = "id.web.saka.fountation.account";
+option java_outer_classname = "AccountProtoFile";
+
+service AccountService {
+  rpc GetAccountMembershipPlanDetailByUserId (AccountMembershipPlanRequest) returns (AccountMembershipPlanResponse);
+  rpc RegisterUser (UserRegistrationRequest) returns (UserRegistrationResponse);
+}
+
+message UserRegistrationRequest {
+  id.web.saka.fountation.user.UserProto user = 1;
+  AccountProto account = 2;
+  id.web.saka.fountation.organization.company.CompanyProto company = 3;
+  id.web.saka.fountation.organization.department.DepartmentProto department = 4;
+}
+
+message UserRegistrationResponse {
+  id.web.saka.fountation.user.UserProto user = 1;
+  AccountProto account = 2;
+  id.web.saka.fountation.organization.company.CompanyProto company = 3;
+  id.web.saka.fountation.organization.department.DepartmentProto department = 4;
+}
+
+message AccountMembershipPlanRequest {
+  int64 company_id = 1;
+  int64 user_id = 2;
+  int64 value_user_id = 3;
+}
+
+message AccountMembershipPlanResponse {
+  string account_number = 1;
+  AccountStatus account_status = 2;
+  AccountType account_type = 3;
+  google.protobuf.Timestamp account_created_at = 4;
+  int64 membership_plan_id = 5;
+  MembershipStatus membership_status = 6;
+  google.protobuf.Timestamp membership_start_date = 7;
+  google.protobuf.Timestamp membership_end_date = 8;
+  MembershipPlanProto membership_plan = 9;
+}
+
+message MembershipPlanProto {
+  int64 id = 1;
+  int64 company_id = 2;
+  MembershipPlanName name = 3;
+  double price = 4;
+  string billing_cycle = 5;
+  string features = 6; // JSON string
+  google.protobuf.Timestamp created_at = 7;
+}
+
+enum AccountStatus {
+  AS_ACTIVE = 0;
+  AS_INACTIVE = 1;
+  AS_DISABLE = 2;
+}
+
+enum AccountType {
+  AT_FREE = 0;
+  AT_PREMIUM = 1;
+  AT_ENTERPRISE = 2;
+}
+
+enum MembershipStatus {
+  MS_ACTIVE = 0;
+  MS_INACTIVE = 1;
+  MS_PENDING = 2;
+}
+
+enum MembershipPlanName {
+  MPN_FREE = 0;
+  MPN_BASIC = 1;
+  MPN_PREMIUM = 2;
+  MPN_ENTERPRISE = 3;
+}
 
 message AccountProto {
-  string account_number = 1;
-  string account_status = 2;
-  string membership_type = 3;
-  string membership_status = 4;
-  google.protobuf.Timestamp created_at = 5;
-  google.protobuf.Timestamp membership_start_date = 6;
-  google.protobuf.Timestamp membership_end_date = 7;
+  int64 id = 1;
+  int64 user_id = 2;
+  string account_number = 3;
+  AccountStatus account_status = 4;
+  AccountType account_type = 5;
+  MembershipStatus membership_status = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp membership_start_date = 8;
+  google.protobuf.Timestamp membership_end_date = 9;
 }
