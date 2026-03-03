@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package id.web.saka.fountation.authorization.policy;
+
+option java_multiple_files = true;
+option java_package = "id.web.saka.fountation.authorization.policy";
+option java_outer_classname = "PolicyProto";
+
+service PolicyService {
+  rpc CheckPolicy (PolicyRequest) returns (PolicyResponse);
+}
+
+message PolicyRequest {
+  string subject = 1;
+  string action = 2;
+  string resource = 3;
+  int64 company_id = 4;
+  optional int64 user_id = 5;
+}
+
+message PolicyResponse {
+  bool is_allow = 1;
+  string reason = 2;
+}
